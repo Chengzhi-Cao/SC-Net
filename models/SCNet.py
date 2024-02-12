@@ -1,9 +1,84 @@
 import math
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-from torch.nn import Softmax
 
+import torch
+from  torch import nn
+import  torch.utils.model_zoo as model_zoo
+from torch.nn import functional as F
+import numpy as np
+import sys
+from torch.autograd import Variable
+import numpy as np
+
+import slayerSNN as snn
+netParams = snn.params('models/network.yaml')
+
+def getNeuronConfig(type: str='SRMALPHA',
+                    theta: float=10.,
+                    tauSr: float=1.,
+                    tauRef: float=1.,
+                    scaleRef: float=2.,
+                    tauRho: float=0.3,  # Was set to 0.2 previously (e.g. for fullRes run)
+                    scaleRho: float=1.):
+    """
+    :param type:     neuron type
+    :param theta:    neuron threshold
+    :param tauSr:    neuron time constant
+    :param tauRef:   neuron refractory time constant
+    :param scaleRef: neuron refractory response scaling (relative to theta)
+    :param tauRho:   spike function derivative time constant (relative to theta)
+    :param scaleRho: spike function derivative scale factor
+    :return: dictionary
+    """
+    return {
+        'type': type,
+        'theta': theta,
+        'tauSr': tauSr,
+        'tauRef': tauRef,
+        'scaleRef': scaleRef,
+        'tauRho': tauRho,
+        'scaleRho': scaleRho,
+    }
+
+class NetworkBasic(torch.nn.Module):
+    def __init__(self, netParams,
+                 theta=[30, 50, 100],
+                 tauSr=[1, 2, 4],
+                 tauRef=[1, 2, 4],
+                 scaleRef=[1, 1, 1],
+                 tauRho=[1, 1, 10],
+                 scaleRho=[10, 10, 100]):
+        super(NetworkBasic, self).__init__()
+
+        self.neuron_config = []
+        self.neuron_config.append(
+            getNeuronConfig(theta=theta[0], tauSr=tauSr[0], tauRef=tauRef[0], scaleRef=scaleRef[0], tauRho=tauRho[0],
+                            scaleRho=scaleRho[0]))
+        self.neuron_config.append(
+            getNeuronConfig(theta=theta[1], tauSr=tauSr[1], tauRef=tauRef[1], scaleRef=scaleRef[1], tauRho=tauRho[1],
+                            scaleRho=scaleRho[1]))
+        self.neuron_config.append(
+            getNeuronConfig(theta=theta[2], tauSr=tauSr[2], tauRef=tauRef[2], scaleRef=scaleRef[2], tauRho=tauRho[2],
+                            scaleRho=scaleRho[2]))
+
+        self.slayer1 = snn.layer(self.neuron_config[0], netParams['simulation'])
+        self.slayer2 = snn.layer(self.neuron_config[1], netParams['simulation'])
+        self.slayer3 = snn.layer(self.neuron_config[2], netParams['simulation'])
+
+        self.conv1 = self.slayer1.conv(8, 8, 5, padding=2)
+        self.conv2 = self.slayer2.conv(8, 8, 3, padding=1)
+        # self.upconv1 = self.slayer3.convTranspose(8, 2, kernelSize=2, stride=2)
+
+
+    def forward(self, spikeInput):
+        psp1 = self.slayer1.psp(spikeInput)
+        spikes_layer_1 = self.slayer1.spike(self.conv1(psp1))
+        spikes_layer_2 = self.slayer2.spike(self.conv2(self.slayer2.psp(spikes_layer_1)))
+
+        return spikes_layer_2
+
+
+##################################################################################
+##################################################################################
 ##################################################################################
 class BasicConv(nn.Module):
     def __init__(self, in_channel, out_channel, kernel_size, stride, bias=True, norm=False, relu=True, transpose=False):
@@ -333,9 +408,9 @@ class TMB(nn.Module):
     
 #####################################################################################
 #####################################################################################
-class STRA(nn.Module):
+class SCNet(nn.Module):
     def __init__(self, num_res,base_channel=16):
-        super(STRA, self).__init__()
+        super(SCNet, self).__init__()
         self.thita = 1e-3
         # base_channel = 32
 
@@ -385,11 +460,16 @@ class STRA(nn.Module):
 
         self.tmb = TMB(out_channel=base_channel)
 
+
+
+        self.snn = NetworkBasic(netParams=netParams)
+
     def forward(self, x,output_last_feature=None):
 
         event = x[:,range(3,9),:,:]
         x = x[:,range(0,3),:,:]
 
+        event = self.snn(event)
         event = self.tmb(event)
 
         x_ = self.feat_extract[0](x)
