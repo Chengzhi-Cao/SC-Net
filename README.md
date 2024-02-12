@@ -1,18 +1,20 @@
-# STRA
+# SC-Net
 
-<img src= "https://github.com/Chengzhi-Cao/STRA/blob/main/pic/network.png" width="120%">
+<!-- <img src= "https://github.com/Chengzhi-Cao/SC-Net/blob/main/pic/network.png" width="100%"> -->
+<img src= "pic/network.png" width="100%">
 
 This repository provides the official PyTorch implementation of the following paper:
 
-> Event-driven Video Deblurring via Spatio-Temporal Relation-Aware Network
+> Event-driven Video Restoration with Spiking-Convolutional Architecture
 >
-> Chengzhi Cao, Xueyang Fu*, Yurui Zhu, Gege Shi, Zheng-jun Zha
+> Chengzhi Cao, Xueyang Fu*, Yurui Zhu, Zhijing Sun, Zheng-jun Zha
 >
-> In IJCAI 2022.
+> IEEE Transactions on Neural Networks and Learning Systems
 >
-> Paper Link:
+> [Paper Link](https://ieeexplore.ieee.org/abstract/document/10314003)
 >
-> Video deblurring with event information has attracted considerable attention. To help deblur each frame, existing methods usually compress a specific event sequence into a feature tensor with the same size as the corresponding video. However, this strategy neither considers the pixel-level spatial brightness changes nor the temporal correlation between events at each time step, resulting in insufficient use of spatio-temporal information. To address this issue, we propose a new Spatio-Temporal Relation-Attention network (STRA), for the specific event-based video deblurring. Concretely, to utilize spatial consistency between the frame and event, we model the brightness changes as an extra prior to aware blurring contexts in each frame; to record temporal relationship among different events, we develop a temporal memory block to restore long-range dependencies of event sequences continuously. In this way, the complementary information contained in the events and frames, as well as the correlation of neighboring events, can be fully utilized to recover spatial texture from events constantly. Experiments show that our STRA significantly outperforms several competing methods, e.g., on the HQF dataset, our network achieves up to 1.3 dB in terms of PSNR over the most advanced method.
+> With high temporal resolution, high dynamic range, and low latency, event cameras have made great progress in numerous low-level vision tasks. To help restore low-quality video sequences, most existing event-based methods usually employ convolutional neural networks (CNNs) to extract sparse event features without considering the spatial sparse distribution or the temporal relation in neighboring events. It brings about insufficient use of spatial and temporal information from events. To address this problem, we propose a new spiking-convolutional network (SC-Net) architecture to facilitate event-driven video restoration. Specifically, to properly extract the rich temporal information contained in the event data, we utilize a spiking neural network (SNN) to suit the sparse characteristics of events and capture temporal correlation in neighboring regions; to make full use of spatial consistency between events and frames, we adopt CNNs to transform sparse events as an extra brightness prior to being aware of detailed textures in video sequences. In this way, both the temporal correlation in neighboring events and the mutual spatial information between the two types of features are fully explored and exploited to accurately restore detailed textures and sharp edges. The effectiveness of the proposed network is validated in three representative video restoration tasks: de-blurring, super-resolution, and de-raining.
+Extensive experiments on synthetic and real-world benchmarks have illuminated that our method performs better than existing competing methods.
 
 ---
 
