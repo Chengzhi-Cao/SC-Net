@@ -5,7 +5,7 @@
 
 This repository provides the official PyTorch implementation of the following paper:
 
-Event-driven Video Restoration with Spiking-Convolutional Architecture
+**Event-driven Video Restoration with Spiking-Convolutional Architecture**
 
 
 Chengzhi Cao, Xueyang Fu*, Yurui Zhu, Zhijing Sun, Zheng-jun Zha
