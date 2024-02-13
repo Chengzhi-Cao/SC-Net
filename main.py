@@ -43,8 +43,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     # Directories
-    parser.add_argument('--model_name', default='STRA', choices=[
-        'STRA',], type=str)
+    parser.add_argument('--model_name', default='SCNet', choices=[
+        'SCNet',], type=str)
     parser.add_argument('--data_dir', type=str, default='/gdata1/caocz/Deblur/GOPRO')
     parser.add_argument('--dataset_name', type=str, default='GOPRO')
     parser.add_argument('--mode', default='train_event_Temporal', choices=['test','train_event_Temporal','valid'], type=str)
