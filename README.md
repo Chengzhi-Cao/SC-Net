@@ -26,12 +26,12 @@ IEEE Transactions on Neural Networks and Learning Systems
 
 ## Dataset
 
-- Download SR dataset from the [NFS-SR dataset](https://openaccess.thecvf.com/content/ICCV2021/html/Han_EvIntSR-Net_Event_Guided_Multiple_Latent_Frames_Reconstruction_and_Super-Resolution_ICCV_2021_paper.html) .
+- Download SR dataset from the [NFS-SR dataset](https://openaccess.thecvf.com/content/ICCV2021/html/Han_EvIntSR-Net_Event_Guided_Multiple_Latent_Frames_Reconstruction_and_Super-Resolution_ICCV_2021_paper.html).
 
-- Download Derain dataset from the [Derain dataset](https://github.com/hotndy/SPAC-SupplementaryMaterials) .
+- Download Derain dataset from the [Derain dataset](https://github.com/hotndy/SPAC-SupplementaryMaterials).
 
 
-- Download deblur dataset from the [GoPro dataset](https://seungjunnah.github.io/Datasets/gopro.html) .
+- Download deblur dataset from the [GoPro dataset](https://seungjunnah.github.io/Datasets/gopro.html).
 
 - Unzip files ```dataset``` folder.
 
