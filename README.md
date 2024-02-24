@@ -22,7 +22,6 @@ IEEE Transactions on Neural Networks and Learning Systems
 - scikit-image
 - opencv-python
 
----
 
 ## Dataset
 
@@ -63,7 +62,7 @@ GOPRO
 
   ``` python data/dataset_event.py```
 
----
+
 
 ## Train
 
@@ -73,7 +72,6 @@ To train SCNet , run the command below:
 
 Model weights will be saved in ``` results/model_name/weights``` folder.
 
----
 
 ## Test
 
@@ -83,7 +81,7 @@ To test SCNet , run the command below:
 
 Output images will be saved in ``` results/model_name/result_image``` folder.
 
----
+
 
 ## Performance
 
@@ -109,8 +107,20 @@ Output images will be saved in ``` results/model_name/result_image``` folder.
 
 
 
-## Contact
-Should you have any question, please contact chengzhicao@mail.ustc.edu.cn.
+## Citation
+
+```
+@ARTICLE{10314003,
+  author={Cao, Chengzhi and Fu, Xueyang and Zhu, Yurui and Sun, Zhijing and Zha, Zheng-Jun},
+  journal={IEEE Transactions on Neural Networks and Learning Systems}, 
+  title={Event-Driven Video Restoration With Spiking-Convolutional Architecture}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={1-15},
+  keywords={Image restoration;Feature extraction;Correlation;Computer architecture;Cameras;Task analysis;Superresolution;Convolutional neural networks (CNNs);event camera;spiking neural networks (SNNs);video restoration},
+  doi={10.1109/TNNLS.2023.3329741}}
+```
 
 ## Notes and references
 The  code is based on the paper:
@@ -118,3 +128,8 @@ The  code is based on the paper:
 'Rethinking Coarse-to-Fine Approach in Single Image Deblurring'(https://arxiv.org/abs/2108.05054)
 
 'Event-driven Video Deblurring via Spatio-Temporal Relation-Aware Network'(https://www.ijcai.org/proceedings/2022/112)
+
+
+## Contact
+Should you have any question, please contact chengzhicao@mail.ustc.edu.cn.
+
