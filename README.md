@@ -85,6 +85,30 @@ Output images will be saved in ``` results/model_name/result_image``` folder.
 
 ---
 
+## Performance
+
+### Super-resolution
+
+<img src= "pic/result5.jpg" width="100%">
+
+<img src= "pic/result2.jpg" width="100%">
+
+
+### De-raining
+
+<img src= "pic/result3.jpg" width="100%">
+
+<img src= "pic/result4.jpg" width="100%">
+
+
+### Deblurring
+
+<img src= "pic/result6.jpg" width="100%">
+
+<img src= "pic/result7.jpg" width="100%">
+
+
+
 ## Contact
 Should you have any question, please contact chengzhicao@mail.ustc.edu.cn.
 
